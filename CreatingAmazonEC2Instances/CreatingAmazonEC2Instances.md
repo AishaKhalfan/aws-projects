@@ -164,12 +164,12 @@ Now that you have configured your EC2 instance settings, it is time to launch yo
 In this task, you use EC2 Instance Connect to log in to the Khalfan-host that you just created.
 
 - On the EC2 Management Console, from the list of EC2 instances displayed, choose the  check box for the Khalfan-host instance. 
-![khalfan-host]()
+![khalfan-host](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/khalfan-host.PNG)
 - Choose Connect.
-![khalfan-host-connect]()
+![khalfan-host-connect](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/khalfan-host-connect.PNG)
 
 - On the EC2 Instance Connect tab, choose Connect to connect to the Khalfan-host.
-![connect-to-instance]()
+![connect-to-instance](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/connect-to-instance.PNG)
 Note: If you prefer to use an SSH client to connect to the EC2 instance, see the guidance to Connect to your Linux instance.
 
 ![connect-to-instance2]()
