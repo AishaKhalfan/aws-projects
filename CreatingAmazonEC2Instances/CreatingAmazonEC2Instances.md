@@ -170,12 +170,21 @@ In this task, you use EC2 Instance Connect to log in to the Khalfan-host that yo
 
 - On the EC2 Instance Connect tab, choose Connect to connect to the Khalfan-host.
 ![connect-to-instance](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/connect-to-instance.PNG)
-Note: If you prefer to use an SSH client to connect to the EC2 instance, see the guidance to Connect to your Linux instance.
+![connect-to-instance2](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/connect-to-instance2.PNG)
 
-![connect-to-instance2]()
 Now that you are connected to the khalfanhost, you can use the AWS CLI to call AWS services.
-![connected]()
+![connected](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/connected.PNG)
  
+**Note: If you prefer to use an SSH client to connect to the EC2 instance, see the guidance below to Connect to your Linux instance.**
+### Connect to instance from terminal using SSH
+- Open the terminal and switch to the directory where your .pem file is located and connect to the instance through the below commands
+	- chmod 400 pemfilename.pem
+	//here pemfilename is the file name you have given to .pem file
+
+	- ssh -i "pemfilename.pem" ec2-user@public_ip
+
+	- example in my case: ssh -i aisha.pem ec2-user@54.190.182.214
+![ssh-connect]()
 
 # Task 3: Launching an EC2 instance using the AWS CLI
  
@@ -196,10 +205,10 @@ You use AWS Systems Manager Parameter Store to retrieve the ID of the most recen
 25. Run the following script in your EC2 Instance Connect session:
 
 ```bash
-#Set the Region
-AZ=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
+# Set the Region
+AZ=`curl -s http://18-237-140-165/latest/meta-data/placement/availability-zone`
 export AWS_DEFAULT_REGION=${AZ::-1}
-#Retrieve latest Linux AMI
+# Retrieve latest Linux AMI
 AMI=$(aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2 --query 'Parameters[0].[Value]' --output text)
 echo $AMI
 ```
@@ -326,6 +335,7 @@ aws ec2 describe-instances --instance-ids $INSTANCE
 ```bash
 aws ec2 describe-instances --instance-ids $INSTANCE --query 'Reservations[].Instances[].State.Name' --output text
 ```
+![describe-instance]()
 
 		This command is the same as the command in the previous step, but rather than displaying all information about the instance, this command displays only the name of the instance state.
 
