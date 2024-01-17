@@ -108,24 +108,24 @@ You launch the instance in a public subnet within the Default VPC network.
 - In the Network settings section, choose Edit.
 
 - From the VPC - required dropdown list, choose  Default VPC.
-![default-vpc]()
+![default-vpc](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/default-vpc.PNG)
 
 The ``Khalfan VPC`` was created using an AWS CloudFormation template during the setup process of your lab. This VPC includes 2 public subnets and 2 private subnets
 
 - In the Subnet dropdown list, notice that Public Subnet is selected by default. Keep this default setting.
 
 - In the Auto-assign public IP dropdown list, notice that Enable is selected by default. Keep this default setting.
-![vpc-khalfan]()
+![vpc-khalfan](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/detailed-vpc.PNG)
 - In the Firewall (security groups) section, notice that Create security group is selected. Configure the following options:
 
 	- For Security group name - required enter khalfanSG
 
 	- For Description - required enter Permit SSH connections
-![vpcsg]()
+![vpcsg](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/vpc-sg.PNG)
 
 **A security group acts as a virtual firewall that controls the traffic for one or more instances. When you launch an instance, you associate one or more security groups with the instance. You add rules to each security group that allow traffic to or from its associated instances. You can modify the rules for a security group at any time; the new rules are automatically applied to all instances that are associated with the security group.**
 
- ![detailed-vpc]()
+ ![detailed-vpc](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/detailed-vpc.PNG)
 
 ## Step 6: Add storage
 You can use this step to add additional Amazon Elastic Block Store (Amazon EBS) disk volumes and configure their size and performance.
@@ -134,16 +134,16 @@ You launch the EC2 instance using a default 8 gibibyte (GiB) disk volume. This i
 
 - In the Configure storage pane, keep the default storage configuration.
 
- ![configure-storage]()
+ ![configure-storage](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/configure-storage.PNG)
 
 ## Step 7: Configure advanced details
 - Expand the Advanced details pane.
-![advanced]()
+![advanced](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/advanced.PNG)
 
 - From IAM instance profile dropdown list, choose Khalfan-Role.
-![khalfan-role1]()
-![khalfan-role]()
-**The Khalfan-Role profile grants permission to applications running on the instance to make requests to the Amazon EC2 service. This association of Role is required for the second half of this lab, where you use the AWS CLI to communicate with the Amazon EC2 service.**
+![khalfan-role1](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/khalfan-role1.PNG)
+![khalfan-role](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/khalfan-role.PNG)
+**The Khalfan-Role profile grants permission to applications running on the instance to make requests to the Amazon EC2 service. This association of Role is required for the second half of this Project, where you use the AWS CLI to communicate with the Amazon EC2 service.**
 
 - Leave the default settings for all the other values.
 
@@ -151,14 +151,14 @@ You launch the EC2 instance using a default 8 gibibyte (GiB) disk volume. This i
 
 ## Step 8: Launch an EC2 instance
 Now that you have configured your EC2 instance settings, it is time to launch your instance.
-![launch-instance-mwisho]()
+![launch-instance-mwisho](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/launch-instance-mwisho.PNG)
 - In the Summary section, review the instance configuration details displayed, and choose Launch instance.
-![success-launch]()
+![success-launch](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/success-launch.PNG)
 
 - Choose View all instances.
-![view-instance]()
+![view-instance](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/view-instance.PNG)
 
-![my-instance]()
+![my-instance](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/my-instance.PNG)
 
 # Task 2: Logging in to the Khalfan host
 In this task, you use EC2 Instance Connect to log in to the bastion host that you just created.
