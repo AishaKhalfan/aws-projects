@@ -30,9 +30,9 @@ The following diagram illustrates the final architecture that you will build:
 # Task 1: Launching an EC2 Instance by using the AWS Management Console
 In this task, you launch an EC2 instance by using the AWS Management Console.
 - On the AWS Management Console, in the Search bar, enter and choose EC2 to open the Amazon EC2 Management Console.
-![ec2-search]()
+![ec2-search](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/ec2-search.PNG)
 - From the Launch instance dropdown list, choose Launch instance to open the Launch an instance menu.
-![launch-instance]()
+![launch-instance](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/launch-instance.PNG)
 
 ## Step 1: Choose name and tags
 - You use tags to categorize your AWS resources in different ways, such as by:
@@ -45,7 +45,7 @@ When you name your instance, AWS creates a key-value pair. The key for this pair
 
 - In the Name and tags section, for Name, enter Khalfan host
 
- ![name-tags]()
+ ![name-tags](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/name-tag.PNG)
 
 ## Step 2: Choose an AMI
 In this step, you choose an Amazon Machine Image (AMI). An AMI includes the following:
@@ -61,7 +61,7 @@ The Quick Start list contains the most commonly used AMIs. You can also create y
 Your ``Khalfan Host`` will use Amazon Linux 2.
 
 - In the Application and OS Images (Amazon Machine Image) section, for Quick Start, confirm that ``Amazon Linux`` is selected. Keep this selection.
-![amazon-linux]()
+![amazon-linux](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/amazon-linux.PNG)
 Note: This option corresponds to Amazon Linux 2 AMI (HVM) as indicated in the Description. 
 
 ## Step 3: Choose an instance type
@@ -75,9 +75,9 @@ In this step, you choose an instance type, which determines the resources that w
 	- The number indicates the generation of the instance, so M5 is newer than M4.
 
 Your application uses a t3.micro instance type, which is a small instance that can burst above baseline performance when it is busy. It is suitable for development and testing purposes and for applications that have bursty workloads.
-![instance-type]()
+![instance-type](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/instance-type.PNG)
 - From the Instance type dropdown list, search for and choose t2.micro because its free tier eligible
-![t2-micro]()
+![t2-micro](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/t2-micro.PNG)
  
 
 ## Step 4: Configure a key pair
@@ -86,14 +86,14 @@ Amazon EC2 uses public key cryptography to encrypt and decrypt login information
 - If you decide to use ``EC2 Instance Connect`` to log in to your instance, you do not require a key pair.
 	- In the Key pair (login) section, from the Key pair name - required dropdown list, choose Proceed without key pair (Not recommended).
 - We will use the SSH Connect to log in to our instance, so we require a key pair.
-![key-pair1]()
+![key-pair1](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/key-pair1.PNG)
 	- In the Key pair (login) section, from the Key pair name - required dropdown list, on the right click ``create new key-pair``
-![key-pair2]()
+![key-pair2](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/key-pair1.PNG)
 	- Add the ``key pair name``
 	- Select ``Key pair type`` to be ``DSA``
 	- Select ``.pem`` if on Linux and ``.ppk`` if on Windows based machine as the ``Private key file format`` 
 	- Click ``create key pair``
-![key-pair-aisha]()
+![key-pair-aisha](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/key-pair-aisha.PNG)
 
 **NOTE**: Save this key-pair you will use it to connect to the instance
 
