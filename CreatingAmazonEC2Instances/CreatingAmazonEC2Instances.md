@@ -161,18 +161,20 @@ Now that you have configured your EC2 instance settings, it is time to launch yo
 ![my-instance](https://github.com/AishaKhalfan/aws-projects/blob/main/CreatingAmazonEC2Instances/images/my-instance.PNG)
 
 # Task 2: Logging in to the Khalfan host
-In this task, you use EC2 Instance Connect to log in to the bastion host that you just created.
+In this task, you use EC2 Instance Connect to log in to the Khalfan-host that you just created.
 
-- On the EC2 Management Console, from the list of EC2 instances displayed, choose the  check box for the Khalfan host instance. 
-
+- On the EC2 Management Console, from the list of EC2 instances displayed, choose the  check box for the Khalfan-host instance. 
+![khalfan-host]()
 - Choose Connect.
+![khalfan-host-connect]()
 
-24. On the EC2 Instance Connect tab, choose Connect to connect to the bastion host.
-
+- On the EC2 Instance Connect tab, choose Connect to connect to the Khalfan-host.
+![connect-to-instance]()
 Note: If you prefer to use an SSH client to connect to the EC2 instance, see the guidance to Connect to your Linux instance.
 
-Now that you are connected to the bastion host, you can use the AWS CLI to call AWS services.
-
+![connect-to-instance2]()
+Now that you are connected to the khalfanhost, you can use the AWS CLI to call AWS services.
+![connected]()
  
 
 # Task 3: Launching an EC2 instance using the AWS CLI
