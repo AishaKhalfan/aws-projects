@@ -100,63 +100,72 @@ Amazon EC2 uses public key cryptography to encrypt and decrypt login information
 ## Step 5: Configure the network settings
 You use this pane to configure networking settings.
 
+
 The virtual private cloud (VPC) indicates which VPC you want to launch the instance into. You can have multiple VPCs, including different ones for development, testing, and production.
 
-You launch the instance in a public subnet within the Lab VPC network.
+You launch the instance in a public subnet within the Default VPC network.
 
-11. In the Network settings section, choose Edit.
+- In the Network settings section, choose Edit.
 
-12. From the VPC - required dropdown list, choose Lab VPC.
+- From the VPC - required dropdown list, choose  Default VPC.
+![default-vpc]()
 
-The Lab VPC was created using an AWS CloudFormation template during the setup process of your lab. This VPC includes one public subnet.
+The ``Khalfan VPC`` was created using an AWS CloudFormation template during the setup process of your lab. This VPC includes 2 public subnets and 2 private subnets
 
-13. In the Subnet dropdown list, notice that Public Subnet is selected by default. Keep this default setting.
+- In the Subnet dropdown list, notice that Public Subnet is selected by default. Keep this default setting.
 
-14. In the Auto-assign public IP dropdown list, notice that Enable is selected by default. Keep this default setting.
+- In the Auto-assign public IP dropdown list, notice that Enable is selected by default. Keep this default setting.
+![vpc-khalfan]()
+- In the Firewall (security groups) section, notice that Create security group is selected. Configure the following options:
 
-15. In the Firewall (security groups) section, notice that Create security group is selected. Configure the following options:
-
-	- For Security group name - required enter Khalfan security group
+	- For Security group name - required enter khalfanSG
 
 	- For Description - required enter Permit SSH connections
+![vpcsg]()
 
-A security group acts as a virtual firewall that controls the traffic for one or more instances. When you launch an instance, you associate one or more security groups with the instance. You add rules to each security group that allow traffic to or from its associated instances. You can modify the rules for a security group at any time; the new rules are automatically applied to all instances that are associated with the security group.
+**A security group acts as a virtual firewall that controls the traffic for one or more instances. When you launch an instance, you associate one or more security groups with the instance. You add rules to each security group that allow traffic to or from its associated instances. You can modify the rules for a security group at any time; the new rules are automatically applied to all instances that are associated with the security group.**
 
- 
+ ![detailed-vpc]()
 
 ## Step 6: Add storage
 You can use this step to add additional Amazon Elastic Block Store (Amazon EBS) disk volumes and configure their size and performance.
 
 You launch the EC2 instance using a default 8 gibibyte (GiB) disk volume. This is your root volume (also known as a boot volume).
 
-16. In the Configure storage pane, keep the default storage configuration.
+- In the Configure storage pane, keep the default storage configuration.
 
- 
+ ![configure-storage]()
 
 ## Step 7: Configure advanced details
-17. Expand the Advanced details pane.
+- Expand the Advanced details pane.
+![advanced]()
 
-18. From IAM instance profile dropdown list, choose Khalfan-Role.
+- From IAM instance profile dropdown list, choose Khalfan-Role.
+![khalfan-role1]()
+![khalfan-role]()
+**The Khalfan-Role profile grants permission to applications running on the instance to make requests to the Amazon EC2 service. This association of Role is required for the second half of this lab, where you use the AWS CLI to communicate with the Amazon EC2 service.**
 
-The Khalfan-Role profile grants permission to applications running on the instance to make requests to the Amazon EC2 service. This association of Role is required for the second half of this lab, where you use the AWS CLI to communicate with the Amazon EC2 service.
-
-19. Leave the default settings for all the other values.
+- Leave the default settings for all the other values.
 
  
 
 ## Step 8: Launch an EC2 instance
 Now that you have configured your EC2 instance settings, it is time to launch your instance.
+![launch-instance-mwisho]()
+- In the Summary section, review the instance configuration details displayed, and choose Launch instance.
+![success-launch]()
 
-20. In the Summary section, review the instance configuration details displayed, and choose Launch instance.
+- Choose View all instances.
+![view-instance]()
 
-21. Choose View all instances.
+![my-instance]()
 
-# Task 2: Logging in to the bastion host
+# Task 2: Logging in to the Khalfan host
 In this task, you use EC2 Instance Connect to log in to the bastion host that you just created.
 
-22. On the EC2 Management Console, from the list of EC2 instances displayed, choose the  check box for the bastion host instance. 
+- On the EC2 Management Console, from the list of EC2 instances displayed, choose the  check box for the Khalfan host instance. 
 
-23. Choose Connect.
+- Choose Connect.
 
 24. On the EC2 Instance Connect tab, choose Connect to connect to the bastion host.
 
