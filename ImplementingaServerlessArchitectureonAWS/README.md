@@ -67,7 +67,7 @@ $${\color{yellow}Lambda function}$$
 - In the AWS Management Console, on the Services menu, choose Lambda.
 
 - Choose $${\color{yellow}Create function}$$
--  Choose [! text in orange]Create function
+-  Choose ```diff ! Create function ```
  Blueprints are code templates for writing Lambda functions. Blueprints are provided for standard Lambda triggers, such as creating Amazon Alexa skills and processing Amazon Kinesis Data Firehose streams. This Project provides you with a pre-written Lambda function, so you will use the Author from scratch option.
 
 Configure the following settings:
