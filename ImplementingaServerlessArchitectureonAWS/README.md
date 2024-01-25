@@ -26,7 +26,7 @@ After completing this Project, you should be able to:
 
 At the ``end`` of this Project, your architecture will look like the following example:
 
-![architect]()
+![architect](https://github.com/AishaKhalfan/aws-projects/blob/main/ImplementingaServerlessArchitectureonAWS/images/architecture.png)
 
 Workflow
 
