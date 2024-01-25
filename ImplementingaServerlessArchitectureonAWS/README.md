@@ -64,29 +64,29 @@ In this task, you will create a Lambda function that will process an inventory f
 $${\color{yellow}Lambda function}$$
 ![lambda]()
 
-- In the AWS Management Console, on the Services menu, choose Lambda.
-
+- In the ``AWS Management Console``, on the ``Services`` menu, choose ``Lambda``.
+![awsconsole]()
 - Choose $${\color{yellow}Create function}$$
--  Choose ```diff ! Create function ```
- Blueprints are code templates for writing Lambda functions. Blueprints are provided for standard Lambda triggers, such as creating Amazon Alexa skills and processing Amazon Kinesis Data Firehose streams. This Project provides you with a pre-written Lambda function, so you will use the Author from scratch option.
+- Choose ``Create function``
+	:zap: ``Blueprints`` are code templates for writing Lambda functions. Blueprints are provided for standard Lambda triggers, such as creating Amazon Alexa skills and processing Amazon Kinesis Data Firehose streams. This Project provides you with a pre-written Lambda function, so you will use the ``Author from scratch`` option.
 
-Configure the following settings:
+- Configure the following settings:
 
-Function name: Load-Inventory
-Runtime: Python 3.7
-Expand  Choose or create an execution role.
-Execution role: Use an existing role
-Existing role: Lambda-Load-Inventory-Role
+	- ``Function name``: Load-Inventory
+	- ``Runtime``: Python 3.7
+	- Expand  ``Choose or create an execution role``.
+	- ``Execution role``: *Use an existing role*
+	- ``Existing role``: *Lambda-Load-Inventory-Role*
 This role gives the Lambda function permissions so that it can access Amazon S3 and DynamoDB.
 
-Choose Create function
+- Choose ``Create function``
 
-Scroll down to the Code source section, and in the Environment pane, choose lambda_function.py.
+- Scroll down to the ``Code source`` section, and in the ``Environment`` pane, choose lambda_function.py.
 
-In the code editor, delete all the code.
+- In the code editor, delete all the code.
 
-In the Code source editor, copy and paste the following code:
-
+- In the ``Code source`` editor, copy and paste the following code:
+```python3
 # Load-Inventory Lambda function
 #
 # This function is triggered by an object being created in an Amazon S3 bucket.
@@ -133,44 +133,49 @@ def lambda_handler(event, context):
          print("Unable to insert data into DynamoDB table".format(e))
     # Finished!
     return "%d counts inserted" % rowCount
+```
+
 Examine the code. It performs the following steps:
 
-Download the file from Amazon S3 that triggered the event
-Loop through each line in the file
-Insert the data into the DynamoDB Inventory table
-Choose Deploy to save your changes.
+	- Download the file from Amazon S3 that triggered the event
+	- Loop through each line in the file
+	- Insert the data into the DynamoDB ``Inventory`` table
+- Choose ``Deploy`` to save your changes.
+![deploy]()
+
 
 Next, you will configure Amazon S3 to trigger the Lambda function when a file is uploaded.
 
 
-Task 2: Configuring an Amazon S3 event
+# Task 2: Configuring an Amazon S3 event
 Stores from around the world provide inventory files to load into the inventory tracking system. Instead of uploading their files via FTP, the stores can upload them directly to Amazon S3. They can upload the files through a webpage, a script, or as part of a program. When a file is received, it triggers the Lambda function. This Lambda function will then load the inventory into a DynamoDB table.
 
-Lambda function
+![Lambda13]()
 
 In this task, you will create an S3 bucket and configure it to trigger the Lambda function.
 
-On the Services menu, choose S3.
+- On the ``Services`` menu, choose ``S3``.
+![services]()
+- Choose ``Create bucket``
+![createbucket]()
 
-Choose Create bucket
+	- Each bucket must have a unique name, so you will add a random number to the bucket name. For example: ``inventory-123``
 
-Each bucket must have a unique name, so you will add a random number to the bucket name. For example: inventory-123
+- For ``Bucket name`` enter: ``inventory-<number>`` (Replace with a random number)
 
-For Bucket name enter: inventory-<number> (Replace with a random number)
+- Choose ``Create bucket``
+	:sparkles: You might receive an error that states: The requested bucket name is not avaiProjectle. If you get this error, choose the first Edit link, change the bucket name, and try again until the bucket name is accepted.
 
-Choose Create bucket
+	You will now configure the bucket to automatically trigger the Lambda function when a file is uploaded.
 
- You might receive an error that states: The requested bucket name is not avaiProjectle. If you get this error, choose the first Edit link, change the bucket name, and try again until the bucket name is accepted.
+- Choose the name of your ``inventory-`` bucket.
 
-You will now configure the bucket to automatically trigger the Lambda function when a file is uploaded.
+- Choose the ``Properties`` tab.
+![properties]()
 
-Choose the name of your inventory- bucket.
+- Scroll down to ``Event notifications.``
 
-Choose the Properties tab.
-
-Scroll down to Event notifications.
-
-You will configure an event to trigger when an object is created in the S3 bucket.
+:star2: You will configure an event to trigger when an object is created in the S3 bucket.
 
 Click Create event notification then configure these settings:
 
