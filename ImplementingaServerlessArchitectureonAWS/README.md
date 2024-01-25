@@ -31,15 +31,14 @@ At the ``end`` of this Project, your architecture will look like the following e
 Workflow
 
 
-Duration
-This Project takes approximately 40 minutes to complete.
+### Duration
+- This Project takes approximately 40 minutes to complete.
 
 
-AWS service restrictions
+## AWS service restrictions
 In this Project environment, access to AWS services and service actions might be restricted to the ones that are needed to complete the Project instructions. You might encounter errors if you attempt to access other services or perform actions beyond the ones that are described in this Project.
 
-
-Accessing the AWS Management Console
+## Accessing the AWS Management Console
 At the top of these instructions, choose Start Lab to launch your Project.
 
 A Start Lab panel opens, and it displays the Project status.
@@ -59,10 +58,10 @@ Arrange the AWS Management Console tab so that it displays alongside these instr
  Do not change the Region unless specifically instructed to do so.
 
 
-Task 1: Creating a Lambda function to load data
+# Task 1: Creating a Lambda function to load data
 In this task, you will create a Lambda function that will process an inventory file. The Lambda function will read the file and insert information into a DynamoDB table.
 
-Lambda function
+$${\color{yellow}Lambda function}$$
 
 In the AWS Management Console, on the Services menu, choose Lambda.
 
