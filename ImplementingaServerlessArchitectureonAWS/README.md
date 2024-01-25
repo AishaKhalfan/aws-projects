@@ -62,10 +62,11 @@ Arrange the AWS Management Console tab so that it displays alongside these instr
 In this task, you will create a Lambda function that will process an inventory file. The Lambda function will read the file and insert information into a DynamoDB table.
 
 $${\color{yellow}Lambda function}$$
+![lambda]()
 
-In the AWS Management Console, on the Services menu, choose Lambda.
+- In the AWS Management Console, on the Services menu, choose Lambda.
 
-Choose Create function
+- Choose $${\color{yellow}``Create function``}$$
 
  Blueprints are code templates for writing Lambda functions. Blueprints are provided for standard Lambda triggers, such as creating Amazon Alexa skills and processing Amazon Kinesis Data Firehose streams. This Project provides you with a pre-written Lambda function, so you will use the Author from scratch option.
 
