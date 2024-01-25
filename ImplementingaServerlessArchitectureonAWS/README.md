@@ -68,6 +68,7 @@ $${\color{yellow}Lambda function}$$
 ![awsconsole]()
 - Choose $${\color{yellow}Create function}$$
 - Choose ``Create function``
+
 	:zap: ``Blueprints`` are code templates for writing Lambda functions. Blueprints are provided for standard Lambda triggers, such as creating Amazon Alexa skills and processing Amazon Kinesis Data Firehose streams. This Project provides you with a pre-written Lambda function, so you will use the ``Author from scratch`` option.
 
 - Configure the following settings:
@@ -164,7 +165,8 @@ In this task, you will create an S3 bucket and configure it to trigger the Lambd
 - For ``Bucket name`` enter: ``inventory-<number>`` (Replace with a random number)
 
 - Choose ``Create bucket``
-	:sparkles: You might receive an error that states: The requested bucket name is not avaiProjectle. If you get this error, choose the first Edit link, change the bucket name, and try again until the bucket name is accepted.
+
+:sparkles: You might receive an error that states: The requested bucket name is not avaiProjectle. If you get this error, choose the first Edit link, change the bucket name, and try again until the bucket name is accepted.
 
 	You will now configure the bucket to automatically trigger the Lambda function when a file is uploaded.
 
@@ -177,36 +179,37 @@ In this task, you will create an S3 bucket and configure it to trigger the Lambd
 
 :star2: You will configure an event to trigger when an object is created in the S3 bucket.
 
-Click Create event notification then configure these settings:
+- Click ``Create event notification`` then configure these settings:
 
-Name: Load-Inventory
-Event types:  All object create events
-Destination: Lambda Function
-Lambda function: Load-Inventory
-Choose Save changes
+	- ``Name``: Load-Inventory
+	- ``Event types``:  *All object create events*
+	- ``Destination``: *Lambda Function*
+	- ``Lambda function``: *Load-Inventory*
+	- Choose ``Save changes``
+
 When an object is created in the bucket, this configuration tells Amazon S3 to trigger the Load-Inventory Lambda function that you created earlier.
 
-Your bucket is now ready to receive inventory files!
+Your bucket is now ready to receive inventory files! :muscle:
 
 
-Task 3: Testing the loading process
+# Task 3: Testing the loading process
 You are now ready to test the loading process. You will upload an inventory file, then check that it loaded successfully.
 
-Load Test
+![uploadinventoryfile]()
 
-Download the inventory files by opening the context (right-click) menu for these links:
+- Download the inventory files by opening the context (right-click) menu for these links:
 
-inventory-berlin.csv
+	- [inventory-berlin.csv](https://github.com/AishaKhalfan/aws-projects/blob/main/ImplementingaServerlessArchitectureonAWS/Files/inventory-berlin.csv)
 
-inventory-calcutta.csv
+	- [inventory-calcutta.csv](https://github.com/AishaKhalfan/aws-projects/blob/main/ImplementingaServerlessArchitectureonAWS/Files/inventory-calcutta.csv)
+	
+	- [inventory-karachi.csv](https://github.com/AishaKhalfan/aws-projects/blob/main/ImplementingaServerlessArchitectureonAWS/Files/inventory-karachi.csv)
 
-inventory-karachi.csv
+	- [inventory-pusan.csv](https://github.com/AishaKhalfan/aws-projects/blob/main/ImplementingaServerlessArchitectureonAWS/Files/inventory-pusan.csv)
 
-inventory-pusan.csv
+	- [inventory-shanghai.csv](https://github.com/AishaKhalfan/aws-projects/blob/main/ImplementingaServerlessArchitectureonAWS/Files/inventory-shanghai.csv)
 
-inventory-shanghai.csv
-
-inventory-springfield.csv
+	- [inventory-springfield.csv](https://github.com/AishaKhalfan/aws-projects/blob/main/ImplementingaServerlessArchitectureonAWS/Files/inventory-springfield.csv)
 
  
 
