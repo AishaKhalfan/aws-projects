@@ -214,7 +214,7 @@ You are now ready to test the loading process. You will upload an inventory file
  
 
 These files are the inventory files that you can use to test the system. They are comma-separated values (CSV) files. The following example shows the contents of the Berlin file:
-
+```csv
   store,item,count
   Berlin,Echo Dot,12
   Berlin,Echo (2nd Gen),19
@@ -222,101 +222,105 @@ These files are the inventory files that you can use to test the system. They ar
   Berlin,Echo Plus,0
   Berlin,Echo Look,10
   Berlin,Amazon Tap,15
-In the console, return to your S3 bucket by choosing the Objects tab.
+```
+- In the console, return to your S3 bucket by choosing the Objects tab.
 
-Choose Upload
+- Choose ``Upload``
 
-Choose Add files, and select one of the inventory CSV files. (You can choose any inventory file.)
+- Choose ``Add files``, and select one of the inventory CSV files. (You can choose any inventory file.)
 
-Choose Upload
+- Choose ``Upload``
 
-Amazon S3 will automatically trigger the Lambda function, which will load the data into a DynamoDB table.
+:thought_balloon: Amazon S3 will automatically trigger the Lambda function, which will load the data into a DynamoDB table.
 
-A serverless Dashboard application has been provided for you to view the results.
+:trophy: A serverless Dashboard application has been provided for you to view the results.
 
-At the top of these instructions, choose the Details button, and to the right of AWS, choose the Show button.
+	- At the top of these instructions, choose the Details button, and to the right of AWS, choose the Show button.
 
-From the Credentials window, copy the Dashboard URL.
+	- From the Credentials window, copy the Dashboard URL.
 
-Open a new web browser tab, paste the URL, and press ENTER.
+- Open a new web browser tab, paste the URL, and press ENTER.
 
-The dashboard application will open and display the inventory data that you loaded into the bucket. The data is retrieved from DynamoDB, which proves that the upload successfully triggered the Lambda function.
+	The dashboard application will open and display the inventory data that you loaded into the bucket. The data is retrieved from DynamoDB, which proves that the upload successfully triggered the Lambda function.
 
-Dashboard
+![Dashboard]()
 
- 
 
- If the dashboard application does not display any information, ask your instructor to help you diagnose the problem.
-
-The dashboard application is served as a static webpage from Amazon S3. The dashboard authenticates via Amazon Cognito as an anonymous user, which provides sufficient permissions for the dashboard to retrieve data from DynamoDB.
+The dashboard application is served as a static webpage from ``Amazon S3``. The dashboard authenticates via Amazon Cognito as an *anonymous user*, which provides sufficient permissions for the dashboard to retrieve data from DynamoDB.
 
 You can also view the data directly in the DynamoDB table.
 
-On the Services menu, choose DynamoDB.
+- On the ``Services menu``, choose ``DynamoDB.``
+![dynamo]()
 
-In the left navigation pane, choose Tables.
+- In the left navigation pane, choose ``Tables``.
 
-Choose the Inventory table.
+- Choose the ``Inventory`` table.
 
-Choose the Items tab.
+- Choose the ``Items`` tab.
 
-The data from the inventory file will be displayed. It shows the store, item and inventory count.
+	:sparkles: The data from the inventory file will be displayed. It shows the store, item and inventory count.
 
 
-Task 4: Configuring notifications
-You want to notify inventory management staff when a store runs out of stock for an item. For this serverless notification functionality, you will use Amazon SNS.
+# Task 4: Configuring notifications
+You want to notify inventory management staff when a store runs out of stock for an item. For this serverless notification functionality, you will use ``Amazon SNS``.
 
-Load Test
+![amazonsns]()
 
 Amazon SNS is a flexible, fully managed publish/subscribe messaging and mobile notifications service. It delivers messages to subscribing endpoints and clients. With Amazon SNS, you can fan out messages to a large number of subscribers, including distributed systems and services, and mobile devices.
 
-On the Services menu, choose Simple Notification Service.
+- On the ``Services`` menu, choose ``Simple Notification Service``.
+![sns]()
 
-In the Create topic box, for Topic name, enter: NoStock. Keep Standard selected.
+- In the ``Create topic`` box, for ``Topic name``, enter: ``NoStock``. Keep ``Standard`` selected.
+![createtopic]()
 
-Choose Create topic
+- Choose ``Create topic``
 
-To receive notifications, you must subscribe to the topic. You can choose to receive notifications via several methods, such as SMS and email.
+	- To receive notifications, you must ``subscribe to the topic. You can choose to receive notifications via several methods, such as SMS and email.
 
-In the lower half of the page, choose Create subscription and configure these settings:
+- In the lower half of the page, choose ``Create subscription`` and configure these settings:
 
-Protocol: Email
-Endpoint: Enter your email address
-Choose Create subscription
- After you create an email subscription, you will receive a confirmation email message. Open the message and choose the Confirm subscription link.
+	- ``Protocol``: *Email*
+	- ``Endpoint``: Enter your email address
+	- Choose ``Create subscription``
+![Createsubscription]()
+
+:thought_balloon: After you create an email subscription, you will receive a confirmation email message. Open the message and choose the ``Confirm subscription`` link.
 
 Any message that is sent to the SNS topic will be forwarded to your email.
 
 
-Task 5: Creating a Lambda function to send notifications
-You could modify the existing Load-Inventory Lambda function to check inventory levels while the file is being loaded. However, this configuration is not a good architectural practice. Instead of overloading the Load-Inventory function with business logic, you will create another Lambda function that is triggered when data is loaded into the DynamoDB table. This function will be triggered by a DynamoDB stream.
+# Task 5: Creating a Lambda function to send notifications
+You could modify the existing Load-Inventory Lambda function to check inventory levels while the file is being loaded. However, this configuration is not a good architectural practice. Instead of overloading the Load-Inventory function with business logic, you will create another Lambda function that is triggered when data is loaded into the DynamoDB table. This function will be triggered by a ``DynamoDB stream``.
 
 This architectural approach offers several benefits:
 
-Each Lambda function performs a single, specific function. This practice makes the code simpler and more maintainable.
-Additional business logic can be added by creating additional Lambda functions. Each function operates independently, so existing functionality is not impacted.
+	- Each Lambda function performs a single, specific function. This practice makes the code simpler and more maintainable.
+	- Additional business logic can be added by creating additional Lambda functions. Each function operates independently, so existing functionality is not impacted.
+
 In this task, you will create another Lambda function that looks at inventory while it is loaded into the DynamoDB table. If the Lambda function notices that an item is out of stock, it will send a notification through the SNS topic you created earlier.
 
-Load Test
+![lambda2]()
 
-On the Services menu, choose Lambda.
+- On the ``Services`` menu, choose ``Lambda``.
 
-Choose Create function and configure these settings:
+- Choose ``Create function`` and configure these settings:
 
-Function name: Check-Stock
-Runtime: Python 3.7
-Expand  Choose or create an execution role.
-Execution role: Use an existing role
-Existing role: Lambda-Check-Stock-Role
-Choose Create function
+	- ``Function name``: Check-Stock
+	- ``Runtime``: *Python 3.7*
+	- Expand :arrow_forward: ``Choose or create an execution role``.
+	- ``Execution role``: *Use an existing role*
+	- ``Existing role``: *Lambda-Check-Stock-Role*
+	- Choose ``Create function``
 This role was configured with permissions to send a notification to Amazon SNS.
 
-Scroll down to the Code source section, and in the Environment pane, choose lambda_function.py.
+- Scroll down to the ``Code source`` section, and in the ``Environment pane``, choose ``lambda_function.py``.
 
-In the code editor, delete all the code.
+- In the code editor, delete all the code.
 
-Copy the following code, and in the Code Source editor, paste the copied code:
-
+- Copy the following code, and in the Code Source editor, paste the copied code:
+```python3
 # Stock Check Lambda function
 #
 # This function is triggered when values are inserted into the Inventory DynamoDB table.
@@ -351,53 +355,45 @@ def lambda_handler(event, context):
         )
   # Finished!
   return 'Successfully processed {} records.'.format(len(event['Records']))
+```
+
 Examine the code. It performs the following steps:
 
-Loop through the incoming records
-If the inventory count is zero, send a message to the NoStock SNS topic
-You will now configure the function so it triggers when data is added to the Inventory table in DynamoDB.
+	- Loop through the incoming records
+	- If the inventory count is zero, send a message to the NoStock SNS topic
+You will now configure the function so it triggers when data is added to the ``Inventory`` table in DynamoDB.
 
-Choose Deploy to save your code changes
+- Choose ``Deploy`` to save your code changes
 
-Scroll to the Designer section (which is at the top of the page).
+- Scroll to the ``Designer`` section (which is at the top of the page).
 
-Choose Add trigger and then configure these settings:
+- Choose `` :heavy_plus_sign: Add trigger`` and then configure these settings:
 
-Select a trigger: DynamoDB
-DynamoDB Table: Inventory
-Choose Add
+	- ``Select a trigger``: *DynamoDB*
+	- ``DynamoDB Table``: *Inventory*
+	- Choose ``Add``
+
 You are now ready to test the system!
 
 
-Task 6: Testing the System
+# Task 6: Testing the System
 You will now upload an inventory file to Amazon S3, which will trigger the original Load-Inventory function. This function will load data into DynamoDB, which will then trigger the new Check-Stock Lambda function. If the Lambda function detects an item with zero inventory, it will send a message to Amazon SNS. Then, Amazon SNS will notify you through SMS or email.
 
-On the Services menu, choose S3.
+- On the ``Services`` menu, choose ``S3``.
 
-Choose the name of your inventory- bucket.
+- Choose the name of your *inventory-* bucket.
 
-Choose Upload and upload a different inventory file.
+- Choose ``Upload`` and upload a different inventory file.
 
-Return to the Inventory System Dashboard and refresh  the page.
+- Return to the ``Inventory System Dashboard`` and refresh  the page.
 
-You should now be able to use the Store menu to view the inventory from both stores.
+	You should now be able to use the Store menu to view the inventory from both stores.
 
-Also, you should receive a notification through SMS or email that the store has an out-of-stock item (each inventory file has one item that is out of stock).
+	Also, you should receive a notification through SMS or email that the store has an out-of-stock item (each inventory file has one item that is out of stock).
 
- If you did not receive a notification, wait a few minutes and upload a different inventory file. The DynamoDB trigger can sometimes take a few minutes to enable.
+	:thought_balloon: If you did not receive a notification, wait a few minutes and upload a different inventory file. The DynamoDB trigger can sometimes take a few minutes to enable.
 
-Try to upload multiple inventory files at the same time. What do you think will happen?
-
-
-Submitting your work
-At the top of these instructions, choose Submit to record your progress and when prompted, choose Yes.
-
-If the results don't display after a couple of minutes, return to the top of these instructions and choose Grades
-
-Tip: You can submit your work multiple times. After you change your work, choose Submit again. Your last submission is what will be recorded for this Project.
-
-To find detailed feedback on your work, choose Details followed by  View Submission Report.
+- Try to upload multiple inventory files at the same time. What do you think will happen?
 
 
-Lab complete 
- Congratulations! You have completed the Project.
+:sparkles: Congratulations! You have completed the Project.
