@@ -1,17 +1,17 @@
 # Implementing a Serverless Architecture on AWS
 ## Scenario
-You are creating an inventory tracking system. Stores from around the world will upload an inventory file to Amazon S3. Your team wants to be able to view the inventory levels and send a notification when inventory levels are low.
+We are creating an inventory tracking system. Stores from around the world will upload an inventory file to Amazon S3. Wer team wants to be able to view the inventory levels and send a notification when inventory levels are low.
 
 In this Project, you will:
 
-- You will upload an ``inventory file`` to an Amazon S3 bucket.
+- We will upload an ``inventory file`` to an Amazon S3 bucket.
 - This upload will trigger a ``Lambda function`` that will read the file and insert items into an ``Amazon DynamoDB table.``
 - ``A serverless, web-based dashboard`` application will use ``Amazon Cognito`` to authenticate to AWS. The application will then gain access to the DynamoDB table to display inventory levels.
 - Another Lambda function will receive updates from the DynamoDB table. This function will send a message to an ``SNS topic`` when an inventory item is out of stock.
 - Amazon SNS will then ``send you a notification through short message service (SMS) or email`` that requests additional inventory.
 
 ## Project overview
-Traditionally, applications run on servers. These servers can be physical (or bare metal). They can also be virtual environments that run on top of physical servers. However, you must purchase and provision all these types of servers, and you must also manage their capacity. In contrast, you can run your code on AWS Lambda without needing to pre-allocate servers. With Lambda, you only need to provide the code and define a trigger. The Lambda function can run when it is needed, whether it is once per week or hundreds of times per second. You only pay for what you use.
+Traditionally, applications run on servers. These servers can be physical (or bare metal). They can also be virtual environments that run on top of physical servers. However, you must purchase and provision all these types of servers, and you must also manage their capacity. In contrast, you can run your code on AWS Lambda without needing to pre-allocate servers. With Lambda, you only need to provide the code and define a trigger. The Lambda function can run when it is needed, whether it is once per week or hundreds of times per second. We only pay for what you use.
 
 This Project demonstrates ``how to trigger a Lambda function when a file is uploaded to Amazon Simple Storage Service (Amazon S3)``. The file will be loaded into an Amazon DynamoDB table. The data will be avaiProjectle for you to view on a dashboard page that retrieves the data directly from DynamoDB. This solution ``does not use Amazon Elastic Compute Cloud (Amazon EC2)``. It is a serverless solution that automatically scales when it is used. It also incurs little cost when it is in use. When it is idle, there is practically no cost because will you only be billed for data storage.
 
@@ -36,7 +36,7 @@ Workflow
 
 
 ## AWS service restrictions
-In this Project environment, access to AWS services and service actions might be restricted to the ones that are needed to complete the Project instructions. You might encounter errors if you attempt to access other services or perform actions beyond the ones that are described in this Project.
+In this Project environment, access to AWS services and service actions might be restricted to the ones that are needed to complete the Project instructions. We might encounter errors if you attempt to access other services or perform actions beyond the ones that are described in this Project.
 
 ## Accessing the AWS Management Console
 At the top of these instructions, choose Start Lab to launch your Project.
@@ -166,9 +166,9 @@ In this task, you will create an S3 bucket and configure it to trigger the Lambd
 
 - Choose ``Create bucket``
 
-:sparkles: You might receive an error that states: The requested bucket name is not avaiProjectle. If you get this error, choose the first Edit link, change the bucket name, and try again until the bucket name is accepted.
+:sparkles: We might receive an error that states: The requested bucket name is not avaiProjectle. If you get this error, choose the first Edit link, change the bucket name, and try again until the bucket name is accepted.
 
-	You will now configure the bucket to automatically trigger the Lambda function when a file is uploaded.
+	We will now configure the bucket to automatically trigger the Lambda function when a file is uploaded.
 
 - Choose the name of your ``inventory-`` bucket.
 
@@ -177,7 +177,7 @@ In this task, you will create an S3 bucket and configure it to trigger the Lambd
 
 - Scroll down to ``Event notifications.``
 
-:star2: You will configure an event to trigger when an object is created in the S3 bucket.
+:star2: We will configure an event to trigger when an object is created in the S3 bucket.
 
 - Click ``Create event notification`` then configure these settings:
 
@@ -189,11 +189,11 @@ In this task, you will create an S3 bucket and configure it to trigger the Lambd
 
 When an object is created in the bucket, this configuration tells Amazon S3 to trigger the Load-Inventory Lambda function that you created earlier.
 
-Your bucket is now ready to receive inventory files! :muscle:
+Wer bucket is now ready to receive inventory files! :muscle:
 
 
 # Task 3: Testing the loading process
-You are now ready to test the loading process. You will upload an inventory file, then check that it loaded successfully.
+We are now ready to test the loading process. We will upload an inventory file, then check that it loaded successfully.
 
 ![uploadinventoryfile]()
 
@@ -227,7 +227,7 @@ These files are the inventory files that you can use to test the system. They ar
 
 - Choose ``Upload``
 
-- Choose ``Add files``, and select one of the inventory CSV files. (You can choose any inventory file.)
+- Choose ``Add files``, and select one of the inventory CSV files. (We can choose any inventory file.)
 
 - Choose ``Upload``
 
@@ -248,7 +248,7 @@ These files are the inventory files that you can use to test the system. They ar
 
 The dashboard application is served as a static webpage from ``Amazon S3``. The dashboard authenticates via Amazon Cognito as an *anonymous user*, which provides sufficient permissions for the dashboard to retrieve data from DynamoDB.
 
-You can also view the data directly in the DynamoDB table.
+We can also view the data directly in the DynamoDB table.
 
 - On the ``Services menu``, choose ``DynamoDB.``
 ![dynamo]()
@@ -263,7 +263,7 @@ You can also view the data directly in the DynamoDB table.
 
 
 # Task 4: Configuring notifications
-You want to notify inventory management staff when a store runs out of stock for an item. For this serverless notification functionality, you will use ``Amazon SNS``.
+We want to notify inventory management staff when a store runs out of stock for an item. For this serverless notification functionality, you will use ``Amazon SNS``.
 
 ![amazonsns]()
 
@@ -277,7 +277,7 @@ Amazon SNS is a flexible, fully managed publish/subscribe messaging and mobile n
 
 - Choose ``Create topic``
 
-	- To receive notifications, you must ``subscribe to the topic. You can choose to receive notifications via several methods, such as SMS and email.
+	- To receive notifications, you must ``subscribe to the topic. We can choose to receive notifications via several methods, such as SMS and email.
 
 - In the lower half of the page, choose ``Create subscription`` and configure these settings:
 
@@ -292,7 +292,7 @@ Any message that is sent to the SNS topic will be forwarded to your email.
 
 
 # Task 5: Creating a Lambda function to send notifications
-You could modify the existing Load-Inventory Lambda function to check inventory levels while the file is being loaded. However, this configuration is not a good architectural practice. Instead of overloading the Load-Inventory function with business logic, you will create another Lambda function that is triggered when data is loaded into the DynamoDB table. This function will be triggered by a ``DynamoDB stream``.
+We could modify the existing Load-Inventory Lambda function to check inventory levels while the file is being loaded. However, this configuration is not a good architectural practice. Instead of overloading the Load-Inventory function with business logic, you will create another Lambda function that is triggered when data is loaded into the DynamoDB table. This function will be triggered by a ``DynamoDB stream``.
 
 This architectural approach offers several benefits:
 
@@ -361,7 +361,7 @@ Examine the code. It performs the following steps:
 
 	- Loop through the incoming records
 	- If the inventory count is zero, send a message to the NoStock SNS topic
-You will now configure the function so it triggers when data is added to the ``Inventory`` table in DynamoDB.
+We will now configure the function so it triggers when data is added to the ``Inventory`` table in DynamoDB.
 
 - Choose ``Deploy`` to save your code changes
 
@@ -373,11 +373,11 @@ You will now configure the function so it triggers when data is added to the ``I
 	- ``DynamoDB Table``: *Inventory*
 	- Choose ``Add``
 
-You are now ready to test the system!
+We are now ready to test the system!
 
 
 # Task 6: Testing the System
-You will now upload an inventory file to Amazon S3, which will trigger the original Load-Inventory function. This function will load data into DynamoDB, which will then trigger the new Check-Stock Lambda function. If the Lambda function detects an item with zero inventory, it will send a message to Amazon SNS. Then, Amazon SNS will notify you through SMS or email.
+We will now upload an inventory file to Amazon S3, which will trigger the original Load-Inventory function. This function will load data into DynamoDB, which will then trigger the new Check-Stock Lambda function. If the Lambda function detects an item with zero inventory, it will send a message to Amazon SNS. Then, Amazon SNS will notify you through SMS or email.
 
 - On the ``Services`` menu, choose ``S3``.
 
@@ -387,7 +387,7 @@ You will now upload an inventory file to Amazon S3, which will trigger the origi
 
 - Return to the ``Inventory System Dashboard`` and refresh  the page.
 
-	You should now be able to use the Store menu to view the inventory from both stores.
+	We should now be able to use the Store menu to view the inventory from both stores.
 
 	Also, you should receive a notification through SMS or email that the store has an out-of-stock item (each inventory file has one item that is out of stock).
 
@@ -396,4 +396,4 @@ You will now upload an inventory file to Amazon S3, which will trigger the origi
 - Try to upload multiple inventory files at the same time. What do you think will happen?
 
 
-:sparkles: Congratulations! You have completed the Project.
+:sparkles: Congratulations! We have completed the Project.
