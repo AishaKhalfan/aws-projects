@@ -26,7 +26,7 @@ After completing this Project, you should be able to:
 
 At the ``end`` of this Project, your architecture will look like the following example:
 
-![architect](https://github.com/AishaKhalfan/aws-projects/blob/main/ImplementingaServerlessArchitectureonAWS/images/architecture.png)
+![architect](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/architecture.png)
 
 ## Accessing the AWS Management Console
 :key: Arrange the AWS Management Console tab so that it displays alongside these instructions. Ideally, you will have both browser tabs open at the same time so that you can follow the lab steps more easily.
@@ -38,14 +38,14 @@ Do not change the Region unless specifically instructed to do so.
 In this task, you will create a Lambda function that will process an inventory file. The Lambda function will read the file and insert information into a DynamoDB table.
 
 $${\color{yellow}Lambda function}$$
-![lambda](https://github.com/AishaKhalfan/aws-projects/blob/main/ImplementingaServerlessArchitectureonAWS/images/lambda.png)
+![lambda](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/lambda.png)
 
 - In the ``AWS Management Console``, on the ``Services`` menu, choose ``Lambda``.
-![LAMBDA1]()
+![LAMBDA1](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/lambda.png)
 - Choose ``Create function``
-![CreateFunction]()
+![CreateFunction](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/CreateFunction.PNG)
 	:zap: *Blueprints* are code templates for writing Lambda functions. Blueprints are provided for standard Lambda triggers, such as creating Amazon Alexa skills and processing Amazon Kinesis Data Firehose streams. This Project provides you with a pre-written Lambda function, so you will use the ``Author from scratch`` option.
-![authorscratch]()
+![authorscratch](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/authorscratch.PNG)
 - Configure the following settings:
 
 	- ``Function name``: Load-Inventory
@@ -54,13 +54,14 @@ $${\color{yellow}Lambda function}$$
 	- ``Execution role``: *Use an existing role*
 	- ``Existing role``: *Lambda-Load-Inventory-Role*
 This role gives the Lambda function permissions so that it can access Amazon S3 and DynamoDB.
-![function-name]()
+![function-name](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/function-name.PNG)
 
 - Choose ``Create function``
-![execution-role]()
-![load-inventory]()
+![execution-role](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/execution-role.PNG)
+
+![load-inventory](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/load-inventory.PNG)
 - Scroll down to the ``Code source`` section, and in the ``Environment`` pane, choose lambda_function.py.
-![code-source]()
+![code-source](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/code-source.PNG)
 - In the code editor, delete all the code.
 
 - In the ``Code source`` editor, copy and paste the following code:
@@ -112,14 +113,14 @@ def lambda_handler(event, context):
     # Finished!
     return "%d counts inserted" % rowCount
 ```
-![CODE]()
+![CODE](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/CODE.PNG)
 Examine the code. It performs the following steps:
 
 	- Download the file from Amazon S3 that triggered the event
 	- Loop through each line in the file
 	- Insert the data into the DynamoDB ``Inventory`` table
 - Choose ``Deploy`` to save your changes.
-![DEPLOY]()
+![DEPLOY](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/DEPLOY.PNG)
 
 
 Next, you will configure Amazon S3 to trigger the Lambda function when a file is uploaded.
@@ -128,35 +129,37 @@ Next, you will configure Amazon S3 to trigger the Lambda function when a file is
 # Task 2: Configuring an Amazon S3 event
 Stores from around the world provide inventory files to load into the inventory tracking system. Instead of uploading their files via FTP, the stores can upload them directly to Amazon S3. They can upload the files through a webpage, a script, or as part of a program. When a file is received, it triggers the Lambda function. This Lambda function will then load the inventory into a DynamoDB table.
 
-![Lambda13](https://github.com/AishaKhalfan/aws-projects/blob/main/ImplementingaServerlessArchitectureonAWS/images/lambda13.png)
+![Lambda13](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/lambda13.png)
 
 In this task, you will create an S3 bucket and configure it to trigger the Lambda function.
 
 - On the ``Services`` menu, choose ``S3``.
-![S3]()
+![S3](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/S3.PNG)
 - Choose ``Create bucket``
-![createbucket]()
+![createbucket](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/create-bucket.PNG)
 
 	- Each bucket must have a unique name, so you will add a random number to the bucket name. For example: ``inventory-123``
 
 - For ``Bucket name`` enter: ``inventory-<number>`` (Replace with a random number)
 
 - Choose ``Create bucket``
-![bucket-name]()
-![final-create-bucket]()
+![bucket-name](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/bucket-name.PNG)
+
+![final-create-bucket](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/final-create-bucket.PNG)
 
 :sparkles: We might receive an error that states: The requested bucket name is not avaiProjectle. If you get this error, choose the first Edit link, change the bucket name, and try again until the bucket name is accepted.
 
 	We will now configure the bucket to automatically trigger the Lambda function when a file is uploaded.
 
 - Choose the name of your ``inventory-`` bucket.
-![inventory-56]()
+![inventory-56](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/inventory-56.PNG)
 
 - Choose the ``Properties`` tab.
-![inventory2-56]()
-![properties]()
+![inventory2-56](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/inventory2-56.PNG)
+
 - Scroll down to ``Event notifications.``
-![event-notification]()
+![event-notification](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/event-notification.PNG)
+
 :star2: We will configure an event to trigger when an object is created in the S3 bucket.
 
 - Click ``Create event notification`` then configure these settings:
@@ -166,9 +169,12 @@ In this task, you will create an S3 bucket and configure it to trigger the Lambd
 	- ``Destination``: *Lambda Function*
 	- ``Lambda function``: *Load-Inventory*
 	- Choose ``Save changes``
-![event-name]()
-![event-types]()
-![destination]()
+
+![event-name](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/event-name.PNG)
+
+![event-types](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/event-type.PNG)
+
+![destination](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/destination.PNG)
 
 When an object is created in the bucket, this configuration tells Amazon S3 to trigger the Load-Inventory Lambda function that you created earlier.
 
