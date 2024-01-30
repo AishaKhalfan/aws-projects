@@ -310,6 +310,8 @@ In this task, you will create another Lambda function that looks at inventory wh
 This role was configured with permissions to send a notification to Amazon SNS.
 
 ![check-stock]()
+![Lambda-Check-Stock-Role]()
+
 - Scroll down to the ``Code source`` section, and in the ``Environment pane``, choose ``lambda_function.py``.
 
 - In the code editor, delete all the code.
@@ -351,6 +353,7 @@ def lambda_handler(event, context):
   # Finished!
   return 'Successfully processed {} records.'.format(len(event['Records']))
 ```
+![check-stockfunction]()
 
 Examine the code. It performs the following steps:
 
@@ -368,8 +371,11 @@ We will now configure the function so it triggers when data is added to the ``In
 	- ``DynamoDB Table``: *Inventory*
 	- Choose ``Add``
 
-We are now ready to test the system!
+![add-trigger]()
+![trigger-config]()
 
+We are now ready to test the system!
+![trigger-inventory]()
 
 # Task 6: Testing the System
 We will now upload an inventory file to Amazon S3, which will trigger the original Load-Inventory function. This function will load data into DynamoDB, which will then trigger the new Check-Stock Lambda function. If the Lambda function detects an item with zero inventory, it will send a message to Amazon SNS. Then, Amazon SNS will notify you through SMS or email.
@@ -383,9 +389,10 @@ We will now upload an inventory file to Amazon S3, which will trigger the origin
 - Return to the ``Inventory System Dashboard`` and refresh  the page.
 
 	We should now be able to use the Store menu to view the inventory from both stores.
+![all-stores2]()
 
 	Also, you should receive a notification through SMS or email that the store has an out-of-stock item (each inventory file has one item that is out of stock).
-
+![]()
 	:thought_balloon: If you did not receive a notification, wait a few minutes and upload a different inventory file. The DynamoDB trigger can sometimes take a few minutes to enable.
 
 - Try to upload multiple inventory files at the same time. What do you think will happen?
