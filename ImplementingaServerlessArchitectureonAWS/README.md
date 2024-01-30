@@ -227,6 +227,11 @@ These files are the inventory files that you can use to test the system. They ar
 
 ![Dashboard]()
 ![inventory-dashboard]()
+![all-stores]()
+![berlin]()
+![calcutta]()
+![pusan]()
+![karachi]()
 
 The dashboard application is served as a static webpage from ``Amazon S3``. The dashboard authenticates via Amazon Cognito as an *anonymous user*, which provides sufficient permissions for the dashboard to retrieve data from DynamoDB.
 
@@ -257,26 +262,31 @@ Amazon SNS is a flexible, fully managed publish/subscribe messaging and mobile n
 ![sns]()
 
 - In the ``Create topic`` box, for ``Topic name``, enter: ``NoStock``. Keep ``Standard`` selected.
-![createtopic]()
+![create-topic]()
 
 - Choose ``Create topic``
 
 	- To receive notifications, you must ``subscribe to the topic. We can choose to receive notifications via several methods, such as SMS and email.
 
+![nostock]()
 - In the lower half of the page, choose ``Create subscription`` and configure these settings:
 
 	- ``Protocol``: *Email*
 	- ``Endpoint``: Enter your email address
 	- Choose ``Create subscription``
-![Createsubscription]()
+
+![create-subscription]()
+![create-subscription2]()
 
 :thought_balloon: After you create an email subscription, you will receive a confirmation email message. Open the message and choose the ``Confirm subscription`` link.
 
 Any message that is sent to the SNS topic will be forwarded to your email.
 
+![subscription]()
+![subscription-confirmed]()
 
 # Task 5: Creating a Lambda function to send notifications
-We could modify the existing Load-Inventory Lambda function to check inventory levels while the file is being loaded. However, this configuration is not a good architectural practice. Instead of overloading the Load-Inventory function with business logic, you will create another Lambda function that is triggered when data is loaded into the DynamoDB table. This function will be triggered by a ``DynamoDB stream``.
+We could modify the existing ``Load-Inventory`` Lambda function to check inventory levels while the file is being loaded. However, this configuration is not a good architectural practice. Instead of overloading the Load-Inventory function with business logic, you will create another Lambda function that is triggered when data is loaded into the DynamoDB table. This function will be triggered by a ``DynamoDB stream``.
 
 This architectural approach offers several benefits:
 
@@ -299,6 +309,7 @@ In this task, you will create another Lambda function that looks at inventory wh
 	- Choose ``Create function``
 This role was configured with permissions to send a notification to Amazon SNS.
 
+![check-stock]()
 - Scroll down to the ``Code source`` section, and in the ``Environment pane``, choose ``lambda_function.py``.
 
 - In the code editor, delete all the code.
