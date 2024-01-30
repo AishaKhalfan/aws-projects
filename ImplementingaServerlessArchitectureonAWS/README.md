@@ -28,62 +28,39 @@ At the ``end`` of this Project, your architecture will look like the following e
 
 ![architect](https://github.com/AishaKhalfan/aws-projects/blob/main/ImplementingaServerlessArchitectureonAWS/images/architecture.png)
 
-Workflow
-
-
-### Duration
-- This Project takes approximately 40 minutes to complete.
-
-
-## AWS service restrictions
-In this Project environment, access to AWS services and service actions might be restricted to the ones that are needed to complete the Project instructions. We might encounter errors if you attempt to access other services or perform actions beyond the ones that are described in this Project.
-
 ## Accessing the AWS Management Console
-At the top of these instructions, choose Start Lab to launch your Project.
+:key: Arrange the AWS Management Console tab so that it displays alongside these instructions. Ideally, you will have both browser tabs open at the same time so that you can follow the lab steps more easily.
 
-A Start Lab panel opens, and it displays the Project status.
-
- Tip: If you need more time to complete the Project, restart the timer for the environment by choosing the Start Lab button again.
-
-Wait until the Start Lab panel displays the message Lab status: ready, then close the panel by choosing the X.
-
-At the top of these instructions, choose AWS.
-
-This action opens the AWS Management Console in a new browser tab. The system automatically logs you in.
-
- Tip: If a new browser tab does not open, a banner or icon is usually at the top of your browser with the message that your browser is preventing the site from opening pop-up windows. Choose the banner or icon, and then choose Allow pop-ups.
-
-Arrange the AWS Management Console tab so that it displays alongside these instructions. Ideally, you will have both browser tabs open at the same time so that you can follow the Project steps more easily.
-
- Do not change the Region unless specifically instructed to do so.
+Do not change the Region unless specifically instructed to do so.
 
 
 # Task 1: Creating a Lambda function to load data
 In this task, you will create a Lambda function that will process an inventory file. The Lambda function will read the file and insert information into a DynamoDB table.
 
 $${\color{yellow}Lambda function}$$
-![lambda]()
+![lambda](https://github.com/AishaKhalfan/aws-projects/blob/main/ImplementingaServerlessArchitectureonAWS/images/lambda.png)
 
 - In the ``AWS Management Console``, on the ``Services`` menu, choose ``Lambda``.
-![awsconsole]()
-- Choose $${\color{yellow}Create function}$$
+![LAMBDA1]()
 - Choose ``Create function``
-
-	:zap: ``Blueprints`` are code templates for writing Lambda functions. Blueprints are provided for standard Lambda triggers, such as creating Amazon Alexa skills and processing Amazon Kinesis Data Firehose streams. This Project provides you with a pre-written Lambda function, so you will use the ``Author from scratch`` option.
-
+![CreateFunction]()
+	:zap: *Blueprints* are code templates for writing Lambda functions. Blueprints are provided for standard Lambda triggers, such as creating Amazon Alexa skills and processing Amazon Kinesis Data Firehose streams. This Project provides you with a pre-written Lambda function, so you will use the ``Author from scratch`` option.
+![authorscratch]()
 - Configure the following settings:
 
 	- ``Function name``: Load-Inventory
-	- ``Runtime``: Python 3.7
-	- Expand  ``Choose or create an execution role``.
+	- ``Runtime``: Python 3.7 0r 3.8
+	- Expand  ``Change default execution role``.
 	- ``Execution role``: *Use an existing role*
 	- ``Existing role``: *Lambda-Load-Inventory-Role*
 This role gives the Lambda function permissions so that it can access Amazon S3 and DynamoDB.
+![function-name]()
 
 - Choose ``Create function``
-
+![execution-role]()
+![load-inventory]()
 - Scroll down to the ``Code source`` section, and in the ``Environment`` pane, choose lambda_function.py.
-
+![code-source]()
 - In the code editor, delete all the code.
 
 - In the ``Code source`` editor, copy and paste the following code:
@@ -135,14 +112,14 @@ def lambda_handler(event, context):
     # Finished!
     return "%d counts inserted" % rowCount
 ```
-
+![CODE]()
 Examine the code. It performs the following steps:
 
 	- Download the file from Amazon S3 that triggered the event
 	- Loop through each line in the file
 	- Insert the data into the DynamoDB ``Inventory`` table
 - Choose ``Deploy`` to save your changes.
-![deploy]()
+![DEPLOY]()
 
 
 Next, you will configure Amazon S3 to trigger the Lambda function when a file is uploaded.
@@ -151,12 +128,12 @@ Next, you will configure Amazon S3 to trigger the Lambda function when a file is
 # Task 2: Configuring an Amazon S3 event
 Stores from around the world provide inventory files to load into the inventory tracking system. Instead of uploading their files via FTP, the stores can upload them directly to Amazon S3. They can upload the files through a webpage, a script, or as part of a program. When a file is received, it triggers the Lambda function. This Lambda function will then load the inventory into a DynamoDB table.
 
-![Lambda13]()
+![Lambda13](https://github.com/AishaKhalfan/aws-projects/blob/main/ImplementingaServerlessArchitectureonAWS/images/lambda13.png)
 
 In this task, you will create an S3 bucket and configure it to trigger the Lambda function.
 
 - On the ``Services`` menu, choose ``S3``.
-![services]()
+![S3]()
 - Choose ``Create bucket``
 ![createbucket]()
 
@@ -165,18 +142,21 @@ In this task, you will create an S3 bucket and configure it to trigger the Lambd
 - For ``Bucket name`` enter: ``inventory-<number>`` (Replace with a random number)
 
 - Choose ``Create bucket``
+![bucket-name]()
+![final-create-bucket]()
 
 :sparkles: We might receive an error that states: The requested bucket name is not avaiProjectle. If you get this error, choose the first Edit link, change the bucket name, and try again until the bucket name is accepted.
 
 	We will now configure the bucket to automatically trigger the Lambda function when a file is uploaded.
 
 - Choose the name of your ``inventory-`` bucket.
+![inventory-56]()
 
 - Choose the ``Properties`` tab.
+![inventory2-56]()
 ![properties]()
-
 - Scroll down to ``Event notifications.``
-
+![event-notification]()
 :star2: We will configure an event to trigger when an object is created in the S3 bucket.
 
 - Click ``Create event notification`` then configure these settings:
@@ -186,10 +166,13 @@ In this task, you will create an S3 bucket and configure it to trigger the Lambd
 	- ``Destination``: *Lambda Function*
 	- ``Lambda function``: *Load-Inventory*
 	- Choose ``Save changes``
+![event-name]()
+![event-types]()
+![destination]()
 
 When an object is created in the bucket, this configuration tells Amazon S3 to trigger the Load-Inventory Lambda function that you created earlier.
 
-Wer bucket is now ready to receive inventory files! :muscle:
+Our bucket is now ready to receive inventory files! :muscle:
 
 
 # Task 3: Testing the loading process
@@ -228,39 +211,40 @@ These files are the inventory files that you can use to test the system. They ar
 - Choose ``Upload``
 
 - Choose ``Add files``, and select one of the inventory CSV files. (We can choose any inventory file.)
-
+![add-files]()
 - Choose ``Upload``
+![upload-success]()
 
 :thought_balloon: Amazon S3 will automatically trigger the Lambda function, which will load the data into a DynamoDB table.
 
 :trophy: A serverless Dashboard application has been provided for you to view the results.
 
-	- At the top of these instructions, choose the Details button, and to the right of AWS, choose the Show button.
-
-	- From the Credentials window, copy the Dashboard URL.
+	- Copy this Dashboard URL.[https://aws-tc-largeobjects.s3-us-west-2.amazonaws.com/ILT-TF-200-ACACAD-20-EN/mod13-guided/web/inventory.htm?region=us-east-1&poolId=us-east-1:eab8cfc0-2a7d-4320-91cc-c43ccbacba53](URL)
 
 - Open a new web browser tab, paste the URL, and press ENTER.
 
 	The dashboard application will open and display the inventory data that you loaded into the bucket. The data is retrieved from DynamoDB, which proves that the upload successfully triggered the Lambda function.
 
 ![Dashboard]()
-
+![inventory-dashboard]()
 
 The dashboard application is served as a static webpage from ``Amazon S3``. The dashboard authenticates via Amazon Cognito as an *anonymous user*, which provides sufficient permissions for the dashboard to retrieve data from DynamoDB.
 
 We can also view the data directly in the DynamoDB table.
 
 - On the ``Services menu``, choose ``DynamoDB.``
-![dynamo]()
+![dynamodb-tables]()
+![dynamodb-tables2]()
 
 - In the left navigation pane, choose ``Tables``.
 
 - Choose the ``Inventory`` table.
 
 - Choose the ``Items`` tab.
-
+![table-items]()
 	:sparkles: The data from the inventory file will be displayed. It shows the store, item and inventory count.
 
+![items-returned]()
 
 # Task 4: Configuring notifications
 We want to notify inventory management staff when a store runs out of stock for an item. For this serverless notification functionality, you will use ``Amazon SNS``.
