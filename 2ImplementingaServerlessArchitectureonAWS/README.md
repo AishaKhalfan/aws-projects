@@ -388,8 +388,8 @@ We will now configure the function so it triggers when data is added to the ``In
 	- ``Select a trigger``: *DynamoDB*
 	- ``DynamoDB Table``: *Inventory*
 	- Choose ``Add``
+![add-trigger1](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/add-trigger1.PNG)
 
-![add-trigger](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/add-trigger.PNG)
 
 ![trigger-config](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/trigger-config.PNG)
 
@@ -411,10 +411,15 @@ We will now upload an inventory file to Amazon S3, which will trigger the origin
 ![all-stores2](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/all-stores2.png)
 
 	Also, you should receive a notification through SMS or email that the store has an out-of-stock item (each inventory file has one item that is out of stock).
-![]()
+![invertory-alert](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/inventory-alert.PNG)
+
+![inventory-alert2](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/inventory-alert2.PNG)
+
 	:thought_balloon: If you did not receive a notification, wait a few minutes and upload a different inventory file. The DynamoDB trigger can sometimes take a few minutes to enable.
 
 - Try to upload multiple inventory files at the same time. What do you think will happen?
 
-
+![multiple-files](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/multiple-files.PNG)
+- You get multiple alerts simultaneously
+  ![multiple-alerts](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/multiple-alerts.PNG)
 :sparkles: Congratulations! We have completed the Project.
