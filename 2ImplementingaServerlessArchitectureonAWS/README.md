@@ -184,7 +184,7 @@ Our bucket is now ready to receive inventory files! :muscle:
 # Task 3: Testing the loading process
 We are now ready to test the loading process. We will upload an inventory file, then check that it loaded successfully.
 
-![uploadinventoryfile]()
+![uploadinventoryfile](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/uploadinventoryfile.png)
 
 - Download the inventory files by opening the context (right-click) menu for these links:
 
@@ -217,9 +217,10 @@ These files are the inventory files that you can use to test the system. They ar
 - Choose ``Upload``
 
 - Choose ``Add files``, and select one of the inventory CSV files. (We can choose any inventory file.)
-![add-files]()
+
+![add-files](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/add-files.PNG)
 - Choose ``Upload``
-![upload-success]()
+![upload-success](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/upload-success.PNG)
 
 :thought_balloon: Amazon S3 will automatically trigger the Lambda function, which will load the data into a DynamoDB table.
 
@@ -231,65 +232,74 @@ These files are the inventory files that you can use to test the system. They ar
 
 	The dashboard application will open and display the inventory data that you loaded into the bucket. The data is retrieved from DynamoDB, which proves that the upload successfully triggered the Lambda function.
 
-![Dashboard]()
-![inventory-dashboard]()
-![all-stores]()
-![berlin]()
-![calcutta]()
-![pusan]()
-![karachi]()
+![Dashboard](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/inventorydash.png)
+
+![inventory-dashboard](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/inventory-dashboard.PNG)
+
+![all-stores](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/all-stores.PNG)
+
+![berlin](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/berlin.PNG)
+
+![calcutta](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/calcutta.PNG)
+
+![pusan](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/pusan.PNG)
+
+![karachi](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/karachi.PNG)
 
 The dashboard application is served as a static webpage from ``Amazon S3``. The dashboard authenticates via Amazon Cognito as an *anonymous user*, which provides sufficient permissions for the dashboard to retrieve data from DynamoDB.
 
 We can also view the data directly in the DynamoDB table.
 
 - On the ``Services menu``, choose ``DynamoDB.``
-![dynamodb-tables]()
-![dynamodb-tables2]()
+![dynamodb-tables](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/dynamodb-tables.PNG)
+
+![dynamodb-tables2](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/dynamodb-tables2.PNG)
 
 - In the left navigation pane, choose ``Tables``.
 
 - Choose the ``Inventory`` table.
 
 - Choose the ``Items`` tab.
-![table-items]()
+![table-items](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/table-items.PNG)
 	:sparkles: The data from the inventory file will be displayed. It shows the store, item and inventory count.
 
-![items-returned]()
+![items-returned](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/items-returned.PNG)
 
 # Task 4: Configuring notifications
 We want to notify inventory management staff when a store runs out of stock for an item. For this serverless notification functionality, you will use ``Amazon SNS``.
 
-![amazonsns]()
+![amazonsns](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/amzonsns.png)
 
 Amazon SNS is a flexible, fully managed publish/subscribe messaging and mobile notifications service. It delivers messages to subscribing endpoints and clients. With Amazon SNS, you can fan out messages to a large number of subscribers, including distributed systems and services, and mobile devices.
 
 - On the ``Services`` menu, choose ``Simple Notification Service``.
-![sns]()
+![sns](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/sns.PNG)
 
 - In the ``Create topic`` box, for ``Topic name``, enter: ``NoStock``. Keep ``Standard`` selected.
-![create-topic]()
+![create-topic](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/create-topic.PNG)
 
 - Choose ``Create topic``
 
 	- To receive notifications, you must ``subscribe to the topic. We can choose to receive notifications via several methods, such as SMS and email.
 
-![nostock]()
+![nostock](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/nostock.PNG)
 - In the lower half of the page, choose ``Create subscription`` and configure these settings:
 
 	- ``Protocol``: *Email*
 	- ``Endpoint``: Enter your email address
 	- Choose ``Create subscription``
 
-![create-subscription]()
-![create-subscription2]()
+![create-subscription](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/create-subscription.PNG)
+
+![create-subscription2](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/create-subscription2.PNG)
 
 :thought_balloon: After you create an email subscription, you will receive a confirmation email message. Open the message and choose the ``Confirm subscription`` link.
 
 Any message that is sent to the SNS topic will be forwarded to your email.
 
-![subscription]()
-![subscription-confirmed]()
+![subscription](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/subscription.PNG)
+
+![subscription-confirmed](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/subscription-confirmed.PNG)
 
 # Task 5: Creating a Lambda function to send notifications
 We could modify the existing ``Load-Inventory`` Lambda function to check inventory levels while the file is being loaded. However, this configuration is not a good architectural practice. Instead of overloading the Load-Inventory function with business logic, you will create another Lambda function that is triggered when data is loaded into the DynamoDB table. This function will be triggered by a ``DynamoDB stream``.
@@ -301,7 +311,7 @@ This architectural approach offers several benefits:
 
 In this task, you will create another Lambda function that looks at inventory while it is loaded into the DynamoDB table. If the Lambda function notices that an item is out of stock, it will send a notification through the SNS topic you created earlier.
 
-![lambda2]()
+![lambda2](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/lambda2.png)
 
 - On the ``Services`` menu, choose ``Lambda``.
 
@@ -315,8 +325,9 @@ In this task, you will create another Lambda function that looks at inventory wh
 	- Choose ``Create function``
 This role was configured with permissions to send a notification to Amazon SNS.
 
-![check-stock]()
-![Lambda-Check-Stock-Role]()
+![check-stock](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/check-stock.PNG)
+
+![Lambda-Check-Stock-Role](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/lambda-check-stock-role.PNG)
 
 - Scroll down to the ``Code source`` section, and in the ``Environment pane``, choose ``lambda_function.py``.
 
@@ -359,12 +370,13 @@ def lambda_handler(event, context):
   # Finished!
   return 'Successfully processed {} records.'.format(len(event['Records']))
 ```
-![check-stockfunction]()
+![check-stockfunction](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/check-stockfunction.PNG)
 
 Examine the code. It performs the following steps:
 
-	- Loop through the incoming records
-	- If the inventory count is zero, send a message to the NoStock SNS topic
+- Loop through the incoming records
+- If the inventory count is zero, send a message to the NoStock SNS topic
+
 We will now configure the function so it triggers when data is added to the ``Inventory`` table in DynamoDB.
 
 - Choose ``Deploy`` to save your code changes
@@ -377,11 +389,12 @@ We will now configure the function so it triggers when data is added to the ``In
 	- ``DynamoDB Table``: *Inventory*
 	- Choose ``Add``
 
-![add-trigger]()
-![trigger-config]()
+![add-trigger](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/add-trigger.PNG)
+
+![trigger-config](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/trigger-config.PNG)
 
 We are now ready to test the system!
-![trigger-inventory]()
+![trigger-inventory](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/trigger-inventory.PNG)
 
 # Task 6: Testing the System
 We will now upload an inventory file to Amazon S3, which will trigger the original Load-Inventory function. This function will load data into DynamoDB, which will then trigger the new Check-Stock Lambda function. If the Lambda function detects an item with zero inventory, it will send a message to Amazon SNS. Then, Amazon SNS will notify you through SMS or email.
@@ -395,7 +408,7 @@ We will now upload an inventory file to Amazon S3, which will trigger the origin
 - Return to the ``Inventory System Dashboard`` and refresh  the page.
 
 	We should now be able to use the Store menu to view the inventory from both stores.
-![all-stores2]()
+![all-stores2](https://github.com/AishaKhalfan/aws-projects/blob/main/2ImplementingaServerlessArchitectureonAWS/images/all-stores2.png)
 
 	Also, you should receive a notification through SMS or email that the store has an out-of-stock item (each inventory file has one item that is out of stock).
 ![]()
